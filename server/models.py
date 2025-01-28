@@ -13,3 +13,12 @@ metadata = MetaData(naming_convention={
 })
 
 db = SQLAlchemy(metadata=metadata)
+
+
+class Driver(db.Model, SerializerMixin):
+    __tablename__ = 'drivers'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    age = db.Column(db.Integer, nullable=False)
+    team = db.Column(db.String(100), nullable=False)
+    stats = db.relationship('Stat', back_populates='driver')
