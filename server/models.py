@@ -22,3 +22,11 @@ class Driver(db.Model, SerializerMixin):
     age = db.Column(db.Integer, nullable=False)
     team = db.Column(db.String(100), nullable=False)
     stats = db.relationship('Stat', back_populates='driver')
+
+class Circuit(db.Model, SerializerMixin):
+    __tablename__ = 'circuits'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    location = db.Column(db.String(100), nullable=False)
+    length = db.Column(db.Float, nullable=False)
+    stats = db.relationship('Stat', back_populates='circuit')
