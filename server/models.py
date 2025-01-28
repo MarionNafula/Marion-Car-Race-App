@@ -30,3 +30,13 @@ class Circuit(db.Model, SerializerMixin):
     location = db.Column(db.String(100), nullable=False)
     length = db.Column(db.Float, nullable=False)
     stats = db.relationship('Stat', back_populates='circuit')
+
+class Stat(db.Model, SerializerMixin):
+    __tablename__ = 'stats'
+    id = db.Column(db.Integer, primary_key=True)
+    driver_id = db.Column(db.Integer, db.ForeignKey('drivers.id'), nullable=False)
+    circuit_id = db.Column(db.Integer, db.ForeignKey('circuits.id'), nullable=False)
+    best_lap_time = db.Column(db.Float, nullable=False)
+
+    driver = db.relationship('Driver', back_populates='stats')
+    circuit = db.relationship('Circuit', back_populates='stats')
